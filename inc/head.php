@@ -41,14 +41,15 @@ session_start();
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="../index.php">Home</a></li>
                     <?php
-                    if ((!empty($_SESSION["login"]))) { ?>
-                     <?= '<li><a href="/log/logout.php">Logout</a></li>'; }
+                    if ((!empty($_SESSION["login"]))) {
+                     echo '<li><a href="/log/logout.php">Logout</a></li>'; }
 
-                    if ((empty($_SESSION["login"]))) { ?>
-                        <?= '<li><a href="/log/login.php">Login</a></li>'; }
+                    if ((empty($_SESSION["login"]))) {
+                        echo '<li><a href="/log/login.php">Login</a></li>'; }
 
-                    if ((!empty($_SESSION["login"]))) { ?>
-                    <?= ' <li><a href="../emptyCart.php">empty cart</a></li>'; }
+                    if ((!empty($_SESSION["login"]))) {
+                        if (!empty($_COOKIE["panier"])) {
+                            echo ' <li><a href="../emptyCart.php">empty cart</a></li>'; }}
                     ?>
 
                     <li><a href="#">Chocolates chips</a></li>
