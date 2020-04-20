@@ -1,15 +1,15 @@
-<?php require '../inc/head.php';
+<?php require 'inc/head.php';
 
-
-if (!empty($_POST['login'])) {
-    $_SESSION["login"] = $_POST['login'];
-    header("location: ../index.php");
-}
-
-if ((!empty($_SESSION["login"]))) {
+if (isset($_SESSION["login"])) {
     //le login a ete enregistré proposer index.php
-    header("Location: ../index.php");
+    header("Location: /");
 }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty(trim($_POST['loginname']))) {
+        $_SESSION['login'] = $_POST['loginname'];
+        header('location: /');
+}
+
 
 ?>
 <div class="container" style="margin-top:40px">
@@ -20,7 +20,7 @@ if ((!empty($_SESSION["login"]))) {
                     <strong> Sign in to continue</strong>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="" method="POST">
+                    <form role="form" action="#" method="POST">
                         <fieldset>
                             <div class="row">
                                 <div class="center-block">
@@ -36,7 +36,7 @@ if ((!empty($_SESSION["login"]))) {
                                             <span class="input-group-addon">
                                               <i class="glyphicon glyphicon-user"></i>
                                             </span>
-                                            <input class="form-control" placeholder="Username" name="login"
+                                            <input class="form-control" placeholder="Username" name="loginname"
                                                    type="text" autofocus>
 
                                         </div>
@@ -56,4 +56,4 @@ if ((!empty($_SESSION["login"]))) {
         </div>
     </div>
 </div>
-<?php require '../inc/foot.php'; ?>
+<?php require 'inc/foot.php'; ?>

@@ -1,6 +1,19 @@
 <?php require 'inc/data/products.php'; ?>
 <?php require 'inc/head.php';
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty(trim($_POST['article']))) {
+    setcookie("article_" . $_SESSION["login"] . "_" . $_POST["article"], $_POST['article'], time()+30*24*3600 ,null, null, false, true);
+    header("Location: login.php");
+}
+
+/* supp cookies setcookie("article_Mao_36" ,"", time() ,null, null, false, true);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty(trim($_POST['article']))) {
+    setcookie("article_" . $_SESSION["login"] . "_" . $_POST["article"],"", time() ,null, null, false, true);
+    header("Location: login.php");
+}
+*/
+
 ?>
 
 
@@ -22,9 +35,12 @@
                     <figcaption class="caption">
                         <h3><?= $cookie['name'] ?></h3>
                         <p><?= $cookie['description'] ?></p>
-                        <a href="?add_to_cart=<?= $id ?>" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add to cart
-                        </a>
+                        <form action="#" method="post">
+                            <input type="hidden" name="article" value="<?= $id ?>">
+                            <button class="btn btn-primary">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add to cart
+                            </button>
+                        </form>
                     </figcaption>
                 </figure>
             </div>
@@ -32,6 +48,4 @@
     </div>
 </section>
 <?php require 'inc/foot.php';
-var_dump($id);
-var_dump($catalog[$id=46]);
 ?>
