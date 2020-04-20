@@ -5,6 +5,15 @@ require 'inc/data/products.php';
 if (empty($_SESSION["login"])) {
     header("location: login.php");
 }
+
+
+/* supp cookies setcookie("article_Mao_36" ,"", time() ,null, null, false, true);*/
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty(trim($_POST['article']))) {
+    setcookie("article_" . $_SESSION["login"] . "_" . $_POST["article"],"", time() ,null, null, false, true);
+    header("Location: cart.php");
+}
+
 ?>
 
 
@@ -19,6 +28,7 @@ if (empty($_SESSION["login"])) {
                 <tr>
                     <th>Article</th>
                     <th>Nombre</th>
+                    <th>supp</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,7 +38,14 @@ if (empty($_SESSION["login"])) {
                      <tr>
                          <td><img style="width:100px" src="assets/img/product-<?= $id ?>.jpg"></td>
                          <td><?= $catalog[$id]['name'] ?></td>
-                         <td></td>
+                         <td>
+                             <form action="#" method="post">
+                                 <input type="hidden" name="article" value="<?= $id ?>">
+                                 <button class="btn btn-primary">
+                                     <span class="glyphicon glyphicon-min" aria-hidden="true"></span>delete
+                                 </button>
+                             </form>
+                         </td>
                          <td></td>
                      </tr>
                 <?php endif; ?>
